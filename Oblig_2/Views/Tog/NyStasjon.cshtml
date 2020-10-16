@@ -1,0 +1,47 @@
+﻿@model Oblig_2.Model.Stasjon
+
+@{
+    ViewBag.Title = "NyStasjon";
+}
+
+<script type="text/javascript">
+    $(function () {
+            document.getElementById('reset').reset();
+    });
+</script>
+
+<h2>Legg til ny stasjon</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.navn, htmlAttributes: new { @class = "control-label" })
+            <div>
+                <input type="text" name="navn" class="form-control navn-input" id="reset" />
+                @Html.ValidationMessageFor(model => model.navn, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.sone, htmlAttributes: new { @class = "control-label" })
+            <div>
+                <input type="number" name="sone" class="form-control sone-input" id="reset" />
+                @Html.ValidationMessageFor(model => model.sone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group NyStasjon-buttons">
+            <div class="NyStasjon-button">
+                <input type="submit" value="Legg til" name="NyStasjon" class="btn btn-VY btn-10margin"/>
+            </div>
+            <div class="NyStasjon-button">
+                <a href="/Admin/AdminIndex" class="btn btn-VY btn-10margin">Tilbake </a>
+            </div>
+
+        </div>
+    </div>
+}

@@ -1,0 +1,45 @@
+﻿@model List<Oblig_2.Model.Stasjon>
+
+@{
+    ViewBag.Title = "AdminStasjon";
+}
+
+<h2>Rediger Stasjon</h2>
+
+<body>
+    <div id="stasjoner-oversikt">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].navn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].sone)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.navn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sone)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Endre", "EndreStasjon", new { SID = item.stasjonId }, new { @class = "text-VY" }) |
+                        @Html.ActionLink("Slett", "SlettStasjon", new { SID = item.stasjonId }, new { @class = "text-VY" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <div class="form-horizontal">
+            <div>
+                <a href="/Admin/AdminIndex" class="btn btn-VY">Tilbake</a>
+            </div>
+        </div>
+    </div>
+</body>

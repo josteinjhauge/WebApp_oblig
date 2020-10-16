@@ -1,0 +1,30 @@
+ -------------- Error (2019-10-24 13:55:06.3558) --------------
+ Kilde Metode: Oblig_2.DAL.AdminDAL.GyldigAdmin
+ Log-Info: Feil med gyldig admin , se Error - melding
+ Error: Exception of type 'System.Exception' was thrown.
+ 
+ -------------- Info (2019-10-24 13:57:37.0698) --------------
+ Kilde Metode: Oblig_2.DAL.AdminDAL.GyldigAdmin
+ Log-Info: Logger Gyldig Admin: VYadmin
+ Error: 
+
+ -------------- Info (2019-10-24 14:00:26.0933) --------------
+ Kilde Metode: Oblig_2.DAL.TogDAL.LagreStasjon
+ Log-Info: Logger lagring av stasjon: Navn på stasjon: Hemsedal
+Sone: 40
+ Error: 
+
+ -------------- Error (2019-10-24 14:03:09.3909) --------------
+ Kilde Metode: Oblig_2.DAL.TogDAL.SlettStasjon
+ Log-Info: Feil med sletting av stasjon, se Error - melding
+ Error: Object reference not set to an instance of an object. 
+
+ -------------- Info (2019-10-25 10:05:57.8030) --------------
+ Kilde Metode: Oblig_2.DAL.TogDAL.SlettBestilling
+ Log-Info: Logger slettet bestilling: Dato: 2019-11-09
+Tid: 13:15
+Fra Stasjon: Nationalteatheret
+Til Stasjon: Ski
+ID: 1
+ Error: 
+

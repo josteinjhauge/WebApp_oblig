@@ -1,0 +1,60 @@
+﻿@model List<Oblig_2.Model.BestillingOversiktViewModel>
+
+@{
+    ViewBag.Title = "AdminBestill";
+}
+
+<h2>Endre bestillinger</h2>
+
+<body>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model[0].fraStasjon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].tilStasjon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].dato)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].tid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].pris)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fraStasjon)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tilStasjon)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dato)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pris)
+                </td>
+                <td>
+                    @Html.ActionLink("Endre", "EndreBestilling", new { BID = item.bestillingId }, new { @class = "text-VY" }) |
+                    @Html.ActionLink("Slett", "SlettBestilling", new { BID = item.bestillingId }, new { @class = "text-VY" })
+                </td>
+            </tr>
+        }
+    </table>
+    <div class="form-horizontal">
+        <div>
+            <a href="/Admin/AdminIndex" class="btn btn-VY">Tilbake</a>
+        </div>
+    </div>
+</body>

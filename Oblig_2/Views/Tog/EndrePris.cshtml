@@ -1,0 +1,53 @@
+﻿@model Oblig_2.Model.Pris
+
+@{
+    ViewBag.Title = "EndrePris";
+}
+
+<script type="text/javascript">
+    $(function displayPris() {
+        $.ajax({
+            type: "POST",
+            url: "/Tog/GetPrisPrSone",
+            dataType: "json",
+            success: function (prisPrSone) {
+                $("#pris").empty().append(prisPrSone + " kr");
+            }
+        });
+    });
+    window.onload = displayPris;
+</script>
+
+<h2>Endre pris</h2>
+
+@using (Html.BeginForm())
+{
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <div class="pris-div">
+            <p>Pris per sone er nå: </p>
+            <p id="pris"></p>
+        </div>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group" id="endreForm">
+            @Html.LabelFor(model => model.sonePris, htmlAttributes: new { @class = "control-label" })
+            <div>
+                <input type="text" name="sonePris" class="form-control" />
+                @Html.ValidationMessageFor(model => model.sonePris, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div>
+                <input type="submit" value="Endre" class="btn btn-VY btn-10margin" />
+            </div>
+            <div>
+                <a href="/Admin/AdminIndex" class="btn btn-VY">Tilbake</a>
+            </div>
+        </div>
+    </div>
+}

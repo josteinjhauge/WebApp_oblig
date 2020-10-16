@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/CustomStyles.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" href="data:;base64,=">
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container nav-container">
+            <div class="navbar-header">
+                @Html.ActionLink("Stasjoner", "Stasjoner", "Tog", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-header">
+                <a href="/Tog/BestillReise" class="navbar-brand"><img src="~/Content/images/vy.logo.final_primary.png" alt="Italian Trulli"></a>
+            </div>
+            <div class="navbar-header float-right">
+                @Html.ActionLink("Bestillinger", "Oversikt", "Tog", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+
+            <span class="nav-litenSkjerm">
+                @Html.ActionLink("Ny bestilling", "BestillReise", "Tog", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Stasjoner", "Stasjoner", "Tog", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Bestillinger", "Oversikt", "Tog", new { area = "" }, new { @class = "navbar-brand" })
+            </span>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <footer class="container footer">
+            <hr />
+            <table class="footer-table">
+                <tr>
+                    <td class="legaltext">
+                        <p>&copy; @DateTime.Now.Year - Oblig 1 - Laget av Jostein Jacobsen Hauge (s333943) og Elin Holde Hegsvold (s333939)</p>
+                    </td>
+                    <td class="LoggInnKnapp">
+                        @if (Session["LoggetInn"] == null || (bool)Session["LoggetInn"] == false)
+                        {
+                            <a href="/Admin/LoggInn" class="btn btn-VY btn-0margin">Logg inn</a>
+                        }
+                        else
+                        {
+                            <a href="/Admin/AdminIndex" class="btn btn-VY btn-10margin">Til Admin-side</a>
+
+                            <a href="/Admin/LoggUt" class="btn btn-danger btn-0margin">Logg ut</a>
+                        }
+                    </td>
+                </tr>
+            </table>
+            
+            
+        </footer>
+    </div>
+</body>
+</html>

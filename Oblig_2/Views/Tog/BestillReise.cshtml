@@ -1,0 +1,113 @@
+﻿@model Oblig_2.Model.Bestilling
+
+@{
+    ViewBag.Title = "BestillReise";
+}
+
+<script type="text/javascript">
+
+    $(function () {
+        $.ajax({
+            url: "/Tog/GetStasjoner",
+            data: '{"StasjonId":"' + $(this).val() + '"}',
+            dataType: "json",
+            type: "GET",
+            success: function (stasjonList) {
+                VisDropDown(stasjonList)
+            },
+            error: function (error) {
+                alert("noe gikk galt første ajax", error);
+            }
+        });
+    });
+
+    function VisDropDown(stasjonList) {
+        var utstreng = "";
+
+        for (var i in stasjonList) {
+            utstreng += "<option value=" + stasjonList[i].stasjonId + ">" + stasjonList[i].navn + "</option>"
+        }
+        $("#fraStasjon").append(utstreng);
+        $("#tilStasjon").append(utstreng);
+    }
+
+    $(function () {
+        $(".form-control").change(function () {
+            var fraStasjon = $("#fraStasjon").val();
+            var tilStasjon = $('#tilStasjon').val();
+
+            if (fraStasjon != 0 && tilStasjon != 0) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Tog/RegnUtPris",
+                    dataType: "json",
+                    data: { fraStasjonID: fraStasjon, tilStasjonID: tilStasjon },
+                    success: function (pris) {
+                        $("#pris").empty().append("Pris for reisen: " + pris + " kr");
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+<h2>Bestill reise</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div>
+            <div class="form-group stasjoner-form fra-stasjon">
+                @Html.LabelFor(model => model.fraStasjon, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    <select class="form-control" id="fraStasjon" name="fraStasjon">
+                        <option value="0" selected hidden>Select</option>
+                    </select>
+                    @Html.ValidationMessageFor(model => model.fraStasjon, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group stasjoner-form til-stasjon">
+                @Html.LabelFor(model => model.tilStasjon, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    <select class="form-control" id="tilStasjon" name="tilStasjon">
+                        <option value="0" selected hidden>Select</option>
+                    </select>
+                    @Html.ValidationMessageFor(model => model.tilStasjon, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="form-group tids-form dato-form">
+                @Html.LabelFor(model => model.dato, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    <input type="date" name="dato" id="dato" />
+                    @Html.ValidationMessageFor(model => model.dato, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group tids-form tid-form">
+                @Html.LabelFor(model => model.tid, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    <input type="time" name="tid" id="tid" />
+                    @Html.ValidationMessageFor(model => model.tid, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="pris-div">
+            <p id="pris"></p>
+        </div>
+
+        <div class="form-group">
+            <div>
+                <input type="submit" value="Kjøp" name="BestillReise" class="btn btn-VY" id="registrer" />
+            </div>
+        </div>
+    </div>
+}
